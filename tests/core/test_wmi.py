@@ -268,7 +268,10 @@ class TestCommonWMI(unittest.TestCase):
         })
         self.patcher.start()
 
+        # Reload to apply the mocking if the module was already loaded
         from checks.libs.wmi import sampler
+        reload(sampler)
+
         WMISampler = partial(sampler.WMISampler, log)
         ProviderArchitecture = sampler.ProviderArchitecture
 
